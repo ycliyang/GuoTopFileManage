@@ -1,0 +1,182 @@
+﻿package com.guotop.filemanage.util;
+
+import java.util.List;
+import java.util.Map;
+import org.apache.http.NameValuePair;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+
+/**
+ * 
+ *
+ *
+ *@author: 李杨
+ *@time: 2013-3-18下午4:35:53
+ */
+public class HttpThread extends Thread{
+	public MyHttp http=new MyHttp();
+	protected String url=null;
+	protected List<NameValuePair> params=null;
+	protected String param=null;
+	protected BaseHandler handler=null;
+	public String result=null;
+	public Message msg=null; 
+	public Bundle bundle = new Bundle();
+	public JSONObject json;
+	public JSONArray jsonArray;
+	public byte[] data;
+	public int refresh=5;
+	public Map<String,String> paramMap = null;
+	public List<MyFile> files ;
+	public int postion;
+	
+	public HttpThread() {
+		myInit();
+	}
+	
+	public void myInit(){
+		
+	}
+	
+	public HttpThread(BaseHandler handler,JSONObject json){
+		this.json=json;
+		this.handler=handler;
+		init();
+	}
+	
+	public HttpThread(BaseHandler handler,boolean flage){
+		this.handler=handler;
+		if(flage){
+			init();
+		}
+	}
+	public HttpThread(String url){
+		this.url=url;
+	}
+	
+	public HttpThread(BaseHandler handler){
+		this.handler=handler;
+		init();
+	}
+	
+	public HttpThread(BaseHandler handler,String url){
+		this.handler=handler;
+		this.url=url;
+		init();
+	}
+	public HttpThread(BaseHandler handler,String url,JSONObject json){
+		this.handler=handler;
+		this.url=url;
+		this.json=json;
+		init();
+	}
+	public HttpThread(BaseHandler handler,String url,JSONArray jsonArray){
+		this.handler=handler;
+		this.url=url;
+		this.jsonArray=jsonArray;
+		init();
+	}
+	public HttpThread(BaseHandler handler,String url,int postion){
+		this.url=url;
+		this.handler=handler;
+		this.postion=postion;
+		init();
+	}
+
+	public HttpThread(BaseHandler handler,String url,String param){
+		this.url=url;
+		this.handler=handler;
+		this.param=param;
+		init();
+	}
+
+	public HttpThread(BaseHandler handler,String url,List<NameValuePair> params,JSONObject json){
+		this.json=json;
+		this.handler=handler;
+		this.url=url;
+		this.params=params;
+		init();
+	}
+	public HttpThread(BaseHandler handler,String url,List<NameValuePair> params){
+		this.handler=handler;
+		this.url=url;
+		this.params=params;
+		init();
+	}
+	
+	public HttpThread(BaseHandler handler,String url,Map<String, String> paramMap,List<MyFile> files){
+		this.handler=handler;
+		this.url=url;
+		this.paramMap = paramMap;
+		this.files = files;
+		init();
+	}
+	
+	
+	public void init(){
+		if(handler!=null){
+			handler.setHttpThread(HttpThread.this);
+		}else {
+			System.out.println("线程的响应Handler 为空！");
+			
+		}
+	}
+	
+	public void run() {
+		msg = handler.obtainMessage();
+		bundle.putString("result", result);
+		msg.what=0;
+		msg.setData(bundle);
+		handler.sendMessage(msg);
+	}
+	
+	public void sendMessageByte(int what){
+		msg = handler.obtainMessage();
+		bundle.putByteArray("result", this.data);
+		msg.what=what;
+		msg.setData(bundle);
+		handler.sendMessage(msg);
+	}
+
+	public void sendMessageOne(int what){
+		msg = handler.obtainMessage();
+		bundle.putString("result", result);
+		msg.what=what;
+		msg.setData(bundle);
+		handler.sendMessage(msg);
+	}
+	public void sendMessage(int what){
+//		if(result!=null&&!"".equals(result)||refresh==0){
+		if(result==null||"".equals(result)){
+			result="{success:false,message:\"服务器忙！\"}";
+		}
+			msg = handler.obtainMessage();
+			bundle.putString("result", result);
+			msg.what=what;
+			msg.setData(bundle);
+			handler.sendMessage(msg);
+//		}else {
+//			refresh--;
+//			this.run();
+//		}
+	}
+	
+	
+	
+	public Bundle getBundle() {
+		return bundle;
+	}
+
+	public void setBundle(Bundle bundle) {
+		this.bundle = bundle;
+	}
+
+	public BaseHandler getMyHandler(){
+		return null;
+	}
+}

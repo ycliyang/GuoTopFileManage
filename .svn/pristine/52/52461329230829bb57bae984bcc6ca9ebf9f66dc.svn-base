@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/topLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top" >
+
+        <LinearLayout
+            android:id="@+id/topRigth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/topCenterParent"
+            android:layout_alignBottom="@+id/topCenterParent"
+            android:layout_alignParentRight="true"
+            android:orientation="vertical" >
+
+            <Button
+            	android:id="@+id/editModeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="编辑" />
+        </LinearLayout>
+
+        <LinearLayout
+           	android:id="@+id/topCenterParent"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/topRigth"
+            android:layout_toRightOf="@+id/topLeft"
+            android:gravity="left"
+            android:orientation="vertical" >
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <LinearLayout
+            		android:id="@+id/topCenter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+	                <Button
+	                    android:layout_width="fill_parent"
+	                    android:layout_height="wrap_content"
+	                    android:text="titleCenter" />
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/topLeft"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/topCenterParent"
+            android:layout_alignBottom="@+id/topCenterParent"
+            android:layout_alignParentLeft="true"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/backButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="返回" />
+        </LinearLayout>
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/bottomLayout"
+        android:layout_below="@+id/topLayout"
+        android:orientation="vertical"
+        android:gravity="top" >
+
+        
+		<ScrollView 
+	       android:layout_width="fill_parent"
+	       android:layout_height="wrap_content">
+            <LinearLayout
+                android:id="@+id/conterLayout"
+                android:layout_width="fill_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content" >
+                
+            </LinearLayout>
+		</ScrollView>
+		
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottomLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="bottom"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="确定" />
+    </LinearLayout>
+
+</RelativeLayout>

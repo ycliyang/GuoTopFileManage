@@ -1,0 +1,39 @@
+package com.guotop.filemanage.view;
+
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.RelativeLayout;
+
+import com.guotop.filemanage.R;
+import com.guotop.filemanage.activity.FileManageActivity;
+
+/**
+ *
+ *文件管理器的底部部分
+ *
+ *@author: 李杨
+ *@time: 2013-8-12下午3:44:04
+ */
+public class FileManageBottomView {
+	private FileManageActivity fileManageActivity;
+	
+	private RelativeLayout bottomLayout;
+	
+	private Button submitButton;
+	
+	
+	public FileManageBottomView(FileManageActivity fileManageActivity) {
+		this.fileManageActivity=fileManageActivity;
+		bottomLayout = (RelativeLayout)fileManageActivity.findViewById(R.id.bottomLayout);
+		
+		submitButton=(Button)fileManageActivity.findViewById(R.id.submitButton);
+		
+		
+		submitButton.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				
+			}
+		});
+	}
+}

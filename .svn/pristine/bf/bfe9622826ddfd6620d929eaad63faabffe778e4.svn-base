@@ -1,0 +1,112 @@
+package com.guotop.filemanage.bean;
+
+import java.io.File;
+
+import com.guotop.filemanage.util.MyFile;
+
+/**
+ *
+ *
+ *@author: ¿Ó—Ó
+ *@time: 2013-8-12œ¬ŒÁ4:36:00
+ */
+public class FileBean {
+	
+	
+	
+	private String createTime;
+	
+	private String updateTime;
+	
+//	private File file;
+	
+	private boolean directory;
+	
+	private String path;
+	
+	private String name;
+	
+	private int icon;
+	
+	
+	public FileBean(File file) {
+//		this.file=file;
+		this.icon = MyFile.getFileIcon(file);
+		this.directory=file.isDirectory();
+		this.path=file.getPath();
+		this.name=file.getName();
+	}
+
+
+	public String getCreateTime() {
+		return createTime;
+	}
+
+
+	public void setCreateTime(String createTime) {
+		this.createTime = createTime;
+	}
+
+
+	public String getUpdateTime() {
+		return updateTime;
+	}
+
+
+	public void setUpdateTime(String updateTime) {
+		this.updateTime = updateTime;
+	}
+
+
+//	public File getFile() {
+//		return file;
+//	}
+//
+//
+//	public void setFile(File file) {
+//		this.file = file;
+//	}
+
+
+	public int getIcon() {
+		return icon;
+	}
+
+
+	public void setIcon(int icon) {
+		this.icon = icon;
+	}
+
+
+	public boolean isDirectory() {
+		return directory;
+	}
+
+
+	public void setDirectory(boolean directory) {
+		this.directory = directory;
+	}
+
+
+	public String getPath() {
+		return path;
+	}
+
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	
+	
+}

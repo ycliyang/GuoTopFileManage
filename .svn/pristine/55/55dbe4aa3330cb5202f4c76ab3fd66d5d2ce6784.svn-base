@@ -1,0 +1,57 @@
+package com.guotop.filemanage.container;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.guotop.filemanage.R;
+import com.guotop.filemanage.bean.ItemFileMenuButtonBean;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.LinearLayout;
+
+/**
+ * Item容器
+ *这个里面放的是item 
+ *
+ *@author: 李杨
+ *@time: 2013-8-12下午4:17:55
+ */
+public class SquareContainer {
+	
+	
+	private List<View> listContainer;
+	
+	
+	public SquareContainer(Context context,List<ItemFileMenuButtonBean> items) {
+		int count=-1,i=0;
+		LinearLayout viewLayout=null;
+		listContainer=new ArrayList<View>();
+		for (ItemFileMenuButtonBean itemMenuButton : items) {
+			if(i==0){
+				viewLayout = (LinearLayout) LayoutInflater.from(context).inflate(R.layout.filemanage_container_square, null);
+				count = viewLayout.getChildCount();
+				listContainer.add(viewLayout);
+			}
+			
+			((LinearLayout)viewLayout.getChildAt(i)).addView(itemMenuButton.getView());
+			i++;
+			if(i==count){
+				i=0;
+			}
+		}
+	}
+
+	public List<View> getListContainer() {
+		return listContainer;
+	}
+
+
+	public void setListContainer(List<View> listContainer) {
+		this.listContainer = listContainer;
+	}
+	
+	
+	
+}

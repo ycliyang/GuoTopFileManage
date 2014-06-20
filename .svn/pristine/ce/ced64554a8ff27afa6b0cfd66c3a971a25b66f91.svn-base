@@ -1,0 +1,126 @@
+package com.guotop.filemanage.bean;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+
+import com.guotop.filemanage.activity.FileManageActivity;
+
+/**
+ *
+ *
+ *@author: 李杨
+ *@time: 2013-8-14下午4:56:44
+ */
+public class FileManageGhostBean {
+	
+	
+	private String reAction;
+	
+	private boolean lockPath;
+	
+	private boolean ghost = false;
+	
+	private boolean loca=false;
+	
+	private String rootPath;
+	
+	private List<String> chooseFileList;
+	
+	private FileManageActivity activity;
+	
+	
+	
+	public FileManageGhostBean(FileManageActivity fileManageActivity){
+		this.activity = fileManageActivity;
+		Bundle bundle = activity.getIntent().getExtras();
+		if (bundle!=null&&bundle.getString("path") != null) {
+			rootPath = activity.getIntent().getStringExtra("path");
+			ghost = true;
+			if (activity.getIntent().getBooleanExtra("lockPath", false)) {
+				activity.getTopView().setRootPath(rootPath);
+			}
+			
+			reAction=bundle.getString("reAction");
+			
+			loca=bundle.getBoolean("loca", false);
+			
+			activity.getBottomView().getSubmitButton().setOnClickListener(new OnClickListener() {
+				public void onClick(View v) {
+					if(reAction!=null&&!"".equals(reAction)&&!loca){
+						Intent intent = new Intent(reAction);
+						Object[] pathsString=activity.getCenterView().getChooseFileList().keySet().toArray();
+						
+						ArrayList<String> pathsList=new ArrayList<String>();
+						for (Object obj : pathsString) {
+							pathsList.add(obj+"");
+						}
+						intent.putStringArrayListExtra("paths", pathsList);
+						activity.sendBroadcast(intent);
+					}else {
+						
+					}
+					activity.finish();
+				}
+			});
+			
+			//代码触发模式切换将浏览模式改成编辑模式
+			activity.getTopView().getEditModeButton().performClick();
+		}
+		
+	}
+
+
+	
+	public void onCheckFile(FileBean bean){
+		
+	}
+	
+	public String getReAction() {
+		return reAction;
+	}
+
+	public void setReAction(String reAction) {
+		this.reAction = reAction;
+	}
+
+	public boolean isLockPath() {
+		return lockPath;
+	}
+
+	public void setLockPath(boolean lockPath) {
+		this.lockPath = lockPath;
+	}
+
+	public String getRootPath() {
+		return rootPath;
+	}
+
+	public void setRootPath(String rootPath) {
+		this.rootPath = rootPath;
+	}
+
+	public List<String> getChooseFileList() {
+		return chooseFileList;
+	}
+
+	public void setChooseFileList(List<String> chooseFileList) {
+		this.chooseFileList = chooseFileList;
+	}
+
+
+	public boolean isGhost() {
+		return ghost;
+	}
+
+
+	public void setGhost(boolean ghost) {
+		this.ghost = ghost;
+	}
+}
